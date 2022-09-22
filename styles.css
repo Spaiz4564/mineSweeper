@@ -7,6 +7,7 @@ h2{
 }
 
 .container {
+    position: relative;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 7px 29px 0px;
     border: 15px solid   #4060ad;
  margin: auto;
@@ -18,7 +19,8 @@ h2{
 }
 
 .title-h2{
-    font-size: 1.6rem;
+    padding-bottom: 60px;
+    font-size: 1.8rem;
     display: flex;
     color: white;
     padding-left: 40px;
@@ -26,13 +28,21 @@ h2{
 
 }
 
+.header{
+    display: flex;
+    /* justify-content:space-between; */
+    gap: 43%;
+    
+}
+
+
+
+
 .smiley{
     cursor: pointer;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 7px 29px 0px;
-    font-size: 20px;
-    top: 22%;
-    right: 42%;
-    position: absolute;
+    font-size: 25px;
+    top: 6%;
+    right: 10%;
     border: none;
 background-color: #2c4ea5 ;    
 
@@ -49,8 +59,30 @@ span{
     opacity: 0;
 }
 
+.clock-emoji{
+    color:grey;
+     filter: grayscale(100%);
+     opacity: 0.7;
+     margin-right: 5px;
+    
+}
+
+.timer{
+    border-radius: 10px;
+    padding: 0.8rem;
+    font-size: 1rem;
+    font-family: 'Fredoka One';
+    font-weight: 200;
+   color: #fdfdfd;
+    background-color:#395ec2 ;
+    border: none;
+    box-shadow: rgb(7, 65, 124) 1.5px 1.5px 1.5px 0px inset, rgba(7, 65, 124) -1.5px -1.5px 1.5px 1px inset;
+
+margin-left: 47px;
+}
+
 table{
-    padding-top: 70px;
+    padding-top: 30px;
     margin: auto
 }
 
@@ -58,7 +90,7 @@ table{
     transition: all 0.3s;
     box-shadow: rgb(7, 65, 124) 1.5px 1.5px 1.5px 0px inset, rgba(7, 65, 124) -1.5px -1.5px 1.5px 1px inset;
     border-radius: 10px;
-    background-color:#2c4ea5 ;
+    background-color:#395ec2 ;
     border: 2px solid #1a43aa ;
     width: 70px;
     height: 70px;
@@ -66,6 +98,6 @@ table{
 }
 
 .cell:hover{
-    background-color:#4060ad ;
+    background-color:#3e65cc ;
 }
 

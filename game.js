@@ -147,7 +147,8 @@ function gameOver() {
     gBoard = buildBoard()
     var spanEl = document.querySelector('cell span')
     gGame.isOn = false
-    document.querySelector('h2').innerText = "You Lost!"
+    document.querySelector('.smiley').innerHTML = '😖'
+    // document.querySelector('h2').innerText = "You Lost!"
     for (let i = 0; i < gBoard.length; i++) {
         for (let j = 0; j < gBoard[i].length; j++) {
 
