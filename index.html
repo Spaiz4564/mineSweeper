@@ -14,6 +14,11 @@
 <body onload = "initGame()">
 <div class = "container">
     <h2 class = "title-h2"> 💣 Minesweeper </h2>
+    <div class ="buttons">
+        <button class="easy-level" onclick="easyLevel(this)">Easy</button>
+        <button class="medium-level" onclick="mediumLevel(this)">Medium</button>
+        <button class="hard-level" onclick="hardLevel(this)">Hard</button>
+    </div>
     
     <div class="header">
         <button class="timer"><span class="clock-emoji">⏰</span ><span id="seconds">00</span>:<span id="tens">00</span></button>

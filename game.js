@@ -5,7 +5,7 @@ var FLAG = '🚩'
 var gBoard
 var gLevel = {
     SIZE: 4,
-    MINES: 3,
+    MINES: 2,
 }
 var gGame = {
     isOn: true,
@@ -14,32 +14,124 @@ var gGame = {
     secsPassed: 0
 }
 
-// let arr1 = [false, true, true],
-//     arr2 = [true, true, true];
-
-// let checker = arr => arr.every(v => v === true);
-
-// console.log(checker(arr1));
-// console.log(checker(arr2));
-
-
-
-
-
-
 
 function initGame() {
     document.querySelector('.bomb-span').innerHTML = '&#128163; ' + '&nbsp;' + gLevel.MINES
-    gBoard = buildBoard()
+    gBoard = buildBoard(gLevel.SIZE)
     renderBoard(gBoard, '.board-container')
 
 }
 
+function easyLevel() {
+    hearts = ['&#10084;&#65039;', '&#10084;&#65039;', '&#10084;&#65039;']
+    var outputSeconds = document.getElementById('seconds')
+    var outputTens = document.getElementById('tens')
+    outputSeconds.innerHTML = "0" + '0'
+    outputTens.innerHTML = "0" + '0'
+    clearInterval(interval)
+    clearInterval(startTime)
+    gGame.shownCount = 0
+    gLevel.SIZE = 4
+    gLevel.MINES = 2
+    initGame()
+    clearInterval(interval)
+    clearInterval(startTime)
+    interval = null
+    seconds = 0o0
+    tens = 0o0
+    outputSeconds.innerHTML = "0" + '0'
+    outputTens.innerHTML = "0" + '0'
+    currentHeart = 2
+    document.querySelector('.weird').classList.remove('shake')
+    document.querySelector('.hearts').classList.remove('shake')
+    document.querySelector('.heart3').innerHTML = hearts[currentHeart]
+    document.querySelector('.heart2').innerHTML = hearts[currentHeart]
+    document.querySelector('.heart1').innerHTML = hearts[currentHeart]
+
+
+}
+
+
+
+function mediumLevel() {
+    hearts = ['&#10084;&#65039;', '&#10084;&#65039;', '&#10084;&#65039;']
+    var outputSeconds = document.getElementById('seconds')
+    var outputTens = document.getElementById('tens')
+    gGame.shownCount = 0
+    gLevel.SIZE = 6
+    gLevel.MINES = 4
+
+
+    initGame()
+
+    clearInterval(interval)
+    clearInterval(startTime)
+    interval = null
+    seconds = 0o0
+    tens = 0o0
+    outputSeconds.innerHTML = "0" + '0'
+    outputTens.innerHTML = "0" + '0'
+    currentHeart = 2
+    document.querySelector('.weird').classList.remove('shake')
+    document.querySelector('.hearts').classList.remove('shake')
+    document.querySelector('.heart3').innerHTML = hearts[currentHeart]
+    document.querySelector('.heart2').innerHTML = hearts[currentHeart]
+    document.querySelector('.heart1').innerHTML = hearts[currentHeart]
+
+    for (let i = 0; i < gBoard.length; i++) {
+        for (let j = 0; j < gBoard[i].length; j++) {
+            document.querySelector(`.cell-${i}-${j}`).style.width = '50px'
+            document.querySelector(`.cell-${i}-${j}`).style.height = '50px'
+
+        }
+    }
+
+}
+
+function hardLevel() {
+    hearts = ['&#10084;&#65039;', '&#10084;&#65039;', '&#10084;&#65039;']
+    var outputSeconds = document.getElementById('seconds')
+    var outputTens = document.getElementById('tens')
+    outputSeconds.innerHTML = "0" + '0'
+    outputTens.innerHTML = "0" + '0'
+    clearInterval(interval)
+    clearInterval(startTime)
+    gGame.shownCount = 0
+    gLevel.SIZE = 7
+    gLevel.MINES = 8
+    initGame()
+    clearInterval(interval)
+    clearInterval(startTime)
+    interval = null
+    seconds = 0o0
+    tens = 0o0
+    outputSeconds.innerHTML = "0" + '0'
+    outputTens.innerHTML = "0" + '0'
+    currentHeart = 2
+    document.querySelector('.weird').classList.remove('shake')
+    document.querySelector('.hearts').classList.remove('shake')
+    document.querySelector('.heart3').innerHTML = hearts[currentHeart]
+    document.querySelector('.heart2').innerHTML = hearts[currentHeart]
+    document.querySelector('.heart1').innerHTML = hearts[currentHeart]
+
+    hearts = ['&#10084;&#65039;', '&#10084;&#65039;', '&#10084;&#65039;']
+    for (let i = 0; i < gBoard.length; i++) {
+        for (let j = 0; j < gBoard[i].length; j++) {
+            document.querySelector(`.cell-${i}-${j}`).style.width = '43px'
+            document.querySelector(`.cell-${i}-${j}`).style.height = '43px'
+        }
+    }
+}
+
+
+
+
+
 function buildBoard(size) {
     var board = []
-    for (let i = 0; i < gLevel.SIZE; i++) {
+    for (let i = 0; i < size; i++) {
         board.push([])
-        for (let j = 0; j < gLevel.SIZE; j++) {
+        for (let j = 0; j < size; j++) {
             board[i][j] = {
                 minesAroundCount: 0,
                 isShown: false,
@@ -52,7 +144,7 @@ function buildBoard(size) {
     // / Random Mines according to difficulty
     for (let i = 0; i < (gLevel.MINES); i++) {
         function generateLocation() {
-            let location = [getRandomInt(0, gLevel.SIZE - 1), getRandomInt(0, gLevel.SIZE - 1)];
+            let location = [getRandomInt(0, size - 1), getRandomInt(0, size - 1)];
             if (board[location[0]][location[1]].isMine === true) return generateLocation(); // runs it again and returns the output of the again
             return location; // just return it if it's unique
         }
@@ -113,7 +205,7 @@ function cellClicked(cellEl, rowIdx, colIdx) {
                 currentHeart--
             } else {
                 hearts[0] = ''
-                document.querySelector('.hearts').classList.add('shake')
+                // document.querySelector('.hearts').classList.add('shake')
                 document.querySelector('.heart1').innerHTML = hearts[currentHeart]
                 gameOver()
             }
@@ -122,6 +214,7 @@ function cellClicked(cellEl, rowIdx, colIdx) {
             cellEl.innerHTML = "💣"
 
         } else {
+            clearInterval(startTime)
             clearInterval(interval)
             interval = setInterval(startTime, 10)
         }
