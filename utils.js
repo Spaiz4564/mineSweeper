@@ -69,3 +69,15 @@ function getLiveMineCount(board, rowIdx, colIdx) {
     }
     return mineCount
 }
+
+function checkIfNoMines() {
+    for (let i = 0; i < gBoard.length; i++) {
+        for (let j = 0; j < gBoard[i].length; j++) {
+            var cell = document.querySelector(`.cell-${i}-${j}`)
+            if (cell.textContent === '0') {
+                // console.log('hello')
+            }
+
+        }
+    }
+}
