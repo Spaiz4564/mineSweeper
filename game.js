@@ -5,7 +5,7 @@ var FLAG = '🚩'
 var gBoard
 var gLevel = {
     SIZE: 4,
-    MINES: 2,
+    MINES: 3,
 }
 var gGame = {
     isOn: true,
@@ -32,7 +32,7 @@ function easyLevel() {
     clearInterval(startTime)
     gGame.shownCount = 0
     gLevel.SIZE = 4
-    gLevel.MINES = 2
+    gLevel.MINES = 3
     initGame()
     clearInterval(interval)
     clearInterval(startTime)
@@ -57,7 +57,7 @@ function mediumLevel() {
     var outputTens = document.getElementById('tens')
     gGame.shownCount = 0
     gLevel.SIZE = 6
-    gLevel.MINES = 4
+    gLevel.MINES = 5
 
 
     initGame()
@@ -96,7 +96,7 @@ function hardLevel() {
     clearInterval(startTime)
     gGame.shownCount = 0
     gLevel.SIZE = 7
-    gLevel.MINES = 8
+    gLevel.MINES = 10
     initGame()
     clearInterval(interval)
     clearInterval(startTime)
@@ -150,7 +150,7 @@ function buildBoard(size) {
 }
 
 function checkGameOver() {
-    if (gGame.shownCount === (gLevel.SIZE ** 2) - gLevel.MINES) {
+    if (gGame.shownCount === (gLevel.SIZE ** 2) - gLevel.MINES && gGame.markedCount === gLevel.MINES) {
         console.log("hello")
         victory()
     }
@@ -161,8 +161,7 @@ var currentHeart = 2
 function cellClicked(cellEl, rowIdx, colIdx) {
     var currentCell = gBoard[rowIdx][colIdx]
     const span = cellEl.querySelector('span')
-    // if (span.innerHTML === '0' && !currentCell.isMine) {
-    // }
+
     if (span.innerText === FLAG) return console.log('forbidden')
     if (gGame.isOn === true) {
         checkIfNoMines()
@@ -190,6 +189,7 @@ function cellClicked(cellEl, rowIdx, colIdx) {
                 document.querySelector('.heart1').innerHTML = hearts[currentHeart]
                 gameOver()
             }
+            gGame.markedCount++
             currentCell.isShown = true
             cellEl.style.backgroundColor = "#a30000"
             cellEl.innerHTML = "💣"
@@ -216,10 +216,10 @@ function rightClick(cell, rowIdx, colIdx) {
         if (!currentC.isShown) {
             if (!currentC.isMarked) {
                 span.innerHTML = FLAG
-
+                gGame.markedCount++
                 span.classList.remove('hidden')
             } else {
-
+                gGame.markedCount--
                 cell.innerHTML = `<span class="spans hidden">${cell.attributes["cell-value"].value}</span>`
             }
             currentC.isMarked = !currentC.isMarked

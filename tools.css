@@ -86,7 +86,6 @@ color: red
 }
 
 .you-lost{
- 
   transition: all 0.3s;
  opacity: 1;
     padding: 1.2rem;
