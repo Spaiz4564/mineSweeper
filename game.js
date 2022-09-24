@@ -15,7 +15,7 @@ var gGame = {
 }
 
 function initGame() {
-    document.querySelector('.bomb-span').innerHTML = '💣 ' + '&nbsp;' + gLevel.MINES
+    document.querySelector('.bomb-span').innerHTML = '&#127884 ' + '&nbsp;' + gLevel.MINES
     gBoard = buildBoard()
     renderBoard(gBoard, '.board-container')
 
@@ -112,7 +112,7 @@ function rightClick(cell, rowIdx, colIdx) {
         interval = setInterval(startTime, 10)
         if (currentC.isMine) {
             gLevel.MINES--
-            document.querySelector('.bomb-span').innerHTML = '💣 ' + '&nbsp;' + gLevel.MINES
+            document.querySelector('.bomb-span').innerHTML = '	&#127884 ' + '&nbsp;' + gLevel.MINES
         }
         if (!currentC.isShown) {
             const span = cell.querySelector('span')
