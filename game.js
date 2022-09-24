@@ -23,7 +23,7 @@ function initGame() {
 
 function buildBoard(size) {
     var board = []
-    for (let i = 0; i < gLevel.SIZE * 1.5; i++) {
+    for (let i = 0; i < gLevel.SIZE; i++) {
         board.push([])
         for (let j = 0; j < gLevel.SIZE; j++) {
             board[i][j] = {
@@ -38,6 +38,7 @@ function buildBoard(size) {
     /// Random Mines according to difficulty
     for (let i = 0; i < (gLevel.MINES); i++) {
         board[getRandomNum(0, gLevel.SIZE)][getRandomNum(0, gLevel.SIZE)].isMine = true
+
     }
 
     return board
@@ -110,6 +111,8 @@ function rightClick(cell, rowIdx, colIdx) {
 function gameOver() {
     clearInterval(interval)
     gGame.isOn = false
+    document.querySelector('.container').style.opacity = "0.3"
+    document.getElementById('restart-btn').classList.remove('hidden1')
     for (let i = 0; i < gBoard.length; i++) {
         for (let j = 0; j < gBoard[i].length; j++) {
             if (gBoard[i][j].isMine === true) {

@@ -66,6 +66,25 @@ color: red
     margin-top: 0.155rem;
 }
 
+#restart-btn{
+  transition: all 0.3s;
+  cursor: pointer;
+ opacity: 1;
+    border-radius: 10px;
+    padding: 1.2rem;
+    font-size: 1.2rem;
+    font-family: 'Fredoka One';
+    font-weight: 200;
+   color: #fdfdfd;
+    background-color:#395ec2 ;
+    border: none;
+    box-shadow: rgb(7, 65, 124) 1.5px 1.5px 1.5px 0px inset, rgba(7, 65, 124) -1.5px -1.5px 1.5px 1px inset;
+  position: absolute;
+  bottom: 22rem;
+  right: 55rem;
+  
+}
+
 
 .timer{
     display: flex;
