@@ -14,6 +14,20 @@ var gGame = {
     secsPassed: 0
 }
 
+// let arr1 = [false, true, true],
+//     arr2 = [true, true, true];
+
+// let checker = arr => arr.every(v => v === true);
+
+// console.log(checker(arr1));
+// console.log(checker(arr2));
+
+
+
+
+
+
+
 function initGame() {
     document.querySelector('.bomb-span').innerHTML = '&#128163; ' + '&nbsp;' + gLevel.MINES
     gBoard = buildBoard()
@@ -45,16 +59,44 @@ function buildBoard(size) {
         let randomLoc = generateLocation();
         board[randomLoc[0]][randomLoc[1]].isMine = true;
     }
+
+
+
+    // var gCheckGameEnd = board.every((cell) => {
+    //     return cell.isShown === true
+
+    // })
+    // console.log(gCheckGameEnd)
+
+    // if (gCheckGameEnd === true) {
+    //     console.log("hello")
+    // }
+
     return board
+}
+
+function checkGameOver() {
+    if (gGame.shownCount === gLevel.SIZE ** 2) {
+        console.log("hello")
+        victory()
+    }
 }
 
 
 var currentHeart = 2
 function cellClicked(cellEl, rowIdx, colIdx) {
     var currentCell = gBoard[rowIdx][colIdx]
+
+
+
     const span = cellEl.querySelector('span')
     if (span.innerText === FLAG) return console.log('forbidden')
     if (gGame.isOn === true) {
+        if (!currentCell.isShown) {
+            gGame.shownCount++
+        }
+
+
         span.classList.remove('hidden')
         currentCell.isShown = true
         if (currentCell.isMine) {
@@ -83,9 +125,12 @@ function cellClicked(cellEl, rowIdx, colIdx) {
             clearInterval(interval)
             interval = setInterval(startTime, 10)
         }
+        checkGameOver()
     }
-}
 
+
+
+}
 
 
 function rightClick(cell, rowIdx, colIdx) {
@@ -95,9 +140,8 @@ function rightClick(cell, rowIdx, colIdx) {
         clearInterval(interval)
         interval = setInterval(startTime, 10)
         gBoard.isMarked = true
-
-        if (currentC.isMine) {
-
+        if (currentC.isMine && !currentC.isMarked) {
+            gGame.shownCount++
         }
         if (!currentC.isShown) {
             const span = cell.querySelector('span')
@@ -105,12 +149,14 @@ function rightClick(cell, rowIdx, colIdx) {
                 span.innerHTML = FLAG
                 span.classList.remove('hidden')
             } else {
-
+                gGame.shownCount--
                 cell.innerHTML = `<span class="spans hidden">${cell.attributes["cell-value"].value}</span>`
             }
             currentC.isMarked = !currentC.isMarked
         }
+        checkGameOver()
     }
+
 }
 
 function gameOver() {
@@ -124,10 +170,18 @@ function gameOver() {
             if (gBoard[i][j].isMine === true) {
                 document.querySelector(`.cell-${i}-${j}`).style.backgroundColor = '#a30000'
                 document.querySelector(`.cell-${i}-${j}`).innerHTML = '💣'
-
             }
         }
     }
+
+}
+
+function victory() {
+    clearInterval(interval)
+    gGame.isOn = false
+    document.querySelector('.container').style.opacity = "0.3"
+    document.getElementById('restart-btn').classList.remove('hidden1')
+    document.querySelector('.you-won').classList.remove('hidden1')
 
 }
 
