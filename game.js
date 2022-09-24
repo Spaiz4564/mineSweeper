@@ -150,7 +150,7 @@ function buildBoard(size) {
 }
 
 function checkGameOver() {
-    if (gGame.shownCount === (gLevel.SIZE ** 2) - gLevel.MINES && gGame.markedCount === gLevel.MINES) {
+    if (checkIfGameOver()) {
         console.log("hello")
         victory()
     }
@@ -159,33 +159,31 @@ function checkGameOver() {
 
 
 function cellClicked(cellEl, rowIdx, colIdx) {
+
+
+
     var currentCell = gBoard[rowIdx][colIdx]
     const span = cellEl.querySelector('span')
-    // for (let i = 0; i < gBoard.length; i++) {
-    //     for (let j = 0; j < gBoard[i].length; j++) {
-    //         if (span.innerText === '0' && !currentCell.isMine) {
 
-    //             var neg1 = document.querySelector(`.cell-${rowIdx - 1}-${colIdx - 1} span`)?.classList.remove('hidden')
-    //             var neg2 = document.querySelector(`.cell-${rowIdx - 1}-${colIdx} span`)?.classList.remove('hidden')
-    //             var neg3 = document.querySelector(`.cell-${rowIdx - 1}-${colIdx + 1} span`)?.classList.remove('hidden')
-    //             var neg4 = document.querySelector(`.cell-${rowIdx}-${colIdx + 1} span`)?.classList.remove('hidden')
-    //             var neg5 = document.querySelector(`.cell-${rowIdx}-${colIdx - 1} span`)?.classList.remove('hidden')
-    //             var neg6 = document.querySelector(`.cell-${rowIdx + 1}-${colIdx} span`)?.classList.remove('hidden')
-    //             var neg7 = document.querySelector(`.cell-${rowIdx + 1}-${colIdx - 1} span`)?.classList.remove('hidden')
-    //             var neg8 = document.querySelector(`.cell-${rowIdx + 1}-${colIdx + 1} span`)?.classList.remove('hidden')
-    //             if (neg1 || neg2 || neg3 || neg4 || neg5 || neg6 || neg7 || neg8 === true) {
-    //                 gGame.shownCount++
-    //             }
-    //         }
-
-    //     }
-    //     // gGame.shownCount++
-    // }
 
     if (span.innerText === FLAG) return console.log('forbidden')
     if (gGame.isOn === true) {
 
         if (!currentCell.isShown && !currentCell.isMine) {
+            for (let i = 0; i < gBoard.length; i++) {
+                for (let j = 0; j < gBoard[i].length; j++) {
+                    if (span.innerText === '0' && !currentCell.isMine) {
+                        var neg1 = document.querySelector(`.cell-${rowIdx - 1}-${colIdx - 1} span`)?.classList.remove('hidden')
+                        var neg2 = document.querySelector(`.cell-${rowIdx - 1}-${colIdx} span`)?.classList.remove('hidden')
+                        var neg3 = document.querySelector(`.cell-${rowIdx - 1}-${colIdx + 1} span`)?.classList.remove('hidden')
+                        var neg4 = document.querySelector(`.cell-${rowIdx}-${colIdx + 1} span`)?.classList.remove('hidden')
+                        var neg5 = document.querySelector(`.cell-${rowIdx}-${colIdx - 1} span`)?.classList.remove('hidden')
+                        var neg6 = document.querySelector(`.cell-${rowIdx + 1}-${colIdx} span`)?.classList.remove('hidden')
+                        var neg7 = document.querySelector(`.cell-${rowIdx + 1}-${colIdx - 1} span`)?.classList.remove('hidden')
+                        var neg8 = document.querySelector(`.cell-${rowIdx + 1}-${colIdx + 1} span`)?.classList.remove('hidden')
+                    }
+                }
+            }
             gGame.shownCount++
         }
         span.classList.remove('hidden')
@@ -216,6 +214,8 @@ function cellClicked(cellEl, rowIdx, colIdx) {
             clearInterval(interval)
             interval = setInterval(startTime, 10)
         }
+
+
         checkGameOver()
     }
 }
@@ -274,4 +274,12 @@ function resetGame() {
 
 }
 
+function checkIfGameOver() {
+    for (let i = 0; i < gBoard.length; i++) {
+        for (let j = 0; j < gBoard[i].length; j++) {
+            if (document.querySelector(`.cell-${i}-${j} span`)?.classList.contains('hidden')) return false
+        }
+    }
 
+    return true
+}
