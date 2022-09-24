@@ -3,7 +3,6 @@ var interval
 var seconds = 0o0
 var tens = 0o0
 var hearts = ['&#10084;&#65039;', '&#10084;&#65039;', '&#10084;&#65039;']
-console.log(hearts)
 document.querySelector('.heart1').innerHTML = hearts[0]
 document.querySelector('.heart2').innerHTML = hearts[1]
 document.querySelector('.heart3').innerHTML = hearts[2]

@@ -5,7 +5,7 @@ var FLAG = '🚩'
 var gBoard
 var gLevel = {
     SIZE: 4,
-    MINES: 3
+    MINES: 3,
 }
 var gGame = {
     isOn: true,
@@ -15,7 +15,7 @@ var gGame = {
 }
 
 function initGame() {
-    document.querySelector('.bomb-span').innerHTML = '&#127884 ' + '&nbsp;' + gLevel.MINES
+    document.querySelector('.bomb-span').innerHTML = '&#128163; ' + '&nbsp;' + gLevel.MINES
     gBoard = buildBoard()
     renderBoard(gBoard, '.board-container')
 
@@ -30,7 +30,7 @@ function buildBoard(size) {
                 minesAroundCount: 0,
                 isShown: false,
                 isMine: false,
-                isMarked: true
+                isMarked: false
             }
         }
     }
@@ -45,21 +45,17 @@ function buildBoard(size) {
 
 var currentHeart = 2
 function cellClicked(cellEl, rowIdx, colIdx) {
-
     var currentCell = gBoard[rowIdx][colIdx]
     const span = cellEl.querySelector('span')
     if (span.innerText === FLAG) return console.log('forbidden')
     if (gGame.isOn === true) {
         span.classList.remove('hidden')
         currentCell.isShown = true
-
         if (currentCell.isMine) {
             if (currentHeart === 2) {
                 hearts[2] = ''
                 document.querySelector('.heart3').innerHTML = hearts[currentHeart]
-                // document.querySelector('.hearts').classList.add('shake')
                 document.querySelector('.weird').classList.add('shake')
-
                 currentHeart--
 
             } else if (currentHeart === 1) {
@@ -85,38 +81,21 @@ function cellClicked(cellEl, rowIdx, colIdx) {
 }
 
 
-// function bombCount() {
-
-//     for (let i = 0; i < gBoard.length; i++) {
-//         for (let j = 0; j < gBoard[i].length; j++) {
-//             if (gBoard[i][j].isMine) {
-
-//                 gLevel.MINES = gLevel.MINES - 1
-//             }
-
-//         }
-
-//     }
-
-// }
-
 
 function rightClick(cell, rowIdx, colIdx) {
     event.preventDefault()
     var currentC = gBoard[rowIdx][colIdx]
-
-    console.log(currentC)
-
     if (gGame.isOn) {
         clearInterval(interval)
         interval = setInterval(startTime, 10)
+        gBoard.isMarked = true
+
         if (currentC.isMine) {
-            gLevel.MINES--
-            document.querySelector('.bomb-span').innerHTML = '	&#127884 ' + '&nbsp;' + gLevel.MINES
+
         }
         if (!currentC.isShown) {
             const span = cell.querySelector('span')
-            if (currentC.isMarked) {
+            if (!currentC.isMarked) {
                 span.innerHTML = FLAG
                 span.classList.remove('hidden')
             } else {

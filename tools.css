@@ -13,7 +13,7 @@ color: red
 
 .bomb-span{
     border-radius: 10px;
-    padding: 0.7rem 1.2rem 0.7rem 1.2rem;
+    padding: 0.8rem 1.2rem 0.8rem 1.2rem;
     font-size: 1rem;
     box-shadow: rgb(7, 65, 124) 1.5px 1.5px 1.5px 0px inset, rgba(7, 65, 124) -1.5px -1.5px 1.5px 1px inset;
     background-color:#395ec2 ;
