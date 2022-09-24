@@ -35,14 +35,19 @@ function buildBoard(size) {
         }
     }
 
-    /// Random Mines according to difficulty
+    // / Random Mines according to difficulty
     for (let i = 0; i < (gLevel.MINES); i++) {
-        board[getRandomNum(0, gLevel.SIZE)][getRandomNum(0, gLevel.SIZE)].isMine = true
-
+        function generateLocation() {
+            let location = [getRandomInt(0, gLevel.SIZE - 1), getRandomInt(0, gLevel.SIZE - 1)];
+            if (board[location[0]][location[1]].isMine === true) return generateLocation(); // runs it again and returns the output of the again
+            return location; // just return it if it's unique
+        }
+        let randomLoc = generateLocation();
+        board[randomLoc[0]][randomLoc[1]].isMine = true;
     }
-
     return board
 }
+
 
 var currentHeart = 2
 function cellClicked(cellEl, rowIdx, colIdx) {
@@ -111,6 +116,7 @@ function rightClick(cell, rowIdx, colIdx) {
 function gameOver() {
     clearInterval(interval)
     gGame.isOn = false
+    document.querySelector('.you-lost').classList.remove('hidden1')
     document.querySelector('.container').style.opacity = "0.3"
     document.getElementById('restart-btn').classList.remove('hidden1')
     for (let i = 0; i < gBoard.length; i++) {
