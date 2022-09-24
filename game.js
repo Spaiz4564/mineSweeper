@@ -5,7 +5,7 @@ var FLAG = '🚩'
 var gBoard
 var gLevel = {
     SIZE: 4,
-    MINES: 2
+    MINES: 3
 }
 var gGame = {
     isOn: true,
@@ -15,6 +15,7 @@ var gGame = {
 }
 
 function initGame() {
+    document.querySelector('.bomb-span').innerHTML = '💣 ' + '&nbsp;' + gLevel.MINES
     gBoard = buildBoard()
     renderBoard(gBoard, '.board-container')
 
@@ -42,8 +43,9 @@ function buildBoard(size) {
     return board
 }
 
-
+var currentHeart = 2
 function cellClicked(cellEl, rowIdx, colIdx) {
+
     var currentCell = gBoard[rowIdx][colIdx]
     const span = cellEl.querySelector('span')
     if (span.innerText === FLAG) return console.log('forbidden')
@@ -52,11 +54,29 @@ function cellClicked(cellEl, rowIdx, colIdx) {
         currentCell.isShown = true
 
         if (currentCell.isMine) {
-            console.log(currentCell)
+            if (currentHeart === 2) {
+                hearts[2] = ''
+                document.querySelector('.heart3').innerHTML = hearts[currentHeart]
+                // document.querySelector('.hearts').classList.add('shake')
+                document.querySelector('.weird').classList.add('shake')
+
+                currentHeart--
+
+            } else if (currentHeart === 1) {
+                hearts[1] = ''
+                document.querySelector('.hearts').classList.add('shake')
+                document.querySelector('.heart2').innerHTML = hearts[currentHeart]
+                currentHeart--
+            } else {
+                hearts[0] = ''
+                document.querySelector('.hearts').classList.add('shake')
+                document.querySelector('.heart1').innerHTML = hearts[currentHeart]
+                gameOver()
+            }
             currentCell.isShown = true
             cellEl.style.backgroundColor = "#a30000"
             cellEl.innerHTML = "💣"
-            gameOver()
+
         } else {
             clearInterval(interval)
             interval = setInterval(startTime, 10)
@@ -64,12 +84,36 @@ function cellClicked(cellEl, rowIdx, colIdx) {
     }
 }
 
+
+// function bombCount() {
+
+//     for (let i = 0; i < gBoard.length; i++) {
+//         for (let j = 0; j < gBoard[i].length; j++) {
+//             if (gBoard[i][j].isMine) {
+
+//                 gLevel.MINES = gLevel.MINES - 1
+//             }
+
+//         }
+
+//     }
+
+// }
+
+
 function rightClick(cell, rowIdx, colIdx) {
     event.preventDefault()
     var currentC = gBoard[rowIdx][colIdx]
+
+    console.log(currentC)
+
     if (gGame.isOn) {
         clearInterval(interval)
         interval = setInterval(startTime, 10)
+        if (currentC.isMine) {
+            gLevel.MINES--
+            document.querySelector('.bomb-span').innerHTML = '💣 ' + '&nbsp;' + gLevel.MINES
+        }
         if (!currentC.isShown) {
             const span = cell.querySelector('span')
             if (currentC.isMarked) {
@@ -87,8 +131,6 @@ function rightClick(cell, rowIdx, colIdx) {
 function gameOver() {
     clearInterval(interval)
     gGame.isOn = false
-    document.querySelector('.smiley').innerHTML = '😖'
-    document.querySelector('.smiley').classList.add('shake')
     for (let i = 0; i < gBoard.length; i++) {
         for (let j = 0; j < gBoard[i].length; j++) {
             if (gBoard[i][j].isMine === true) {
@@ -105,7 +147,5 @@ function resetGame() {
     location.reload()
 
 }
-
-
 
 
