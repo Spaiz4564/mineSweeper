@@ -114,8 +114,8 @@ function hardLevel() {
     hearts = ['&#10084;&#65039;', '&#10084;&#65039;', '&#10084;&#65039;']
     for (let i = 0; i < gBoard.length; i++) {
         for (let j = 0; j < gBoard[i].length; j++) {
-            document.querySelector(`.cell-${i}-${j}`).style.width = '43px'
-            document.querySelector(`.cell-${i}-${j}`).style.height = '43px'
+            document.querySelector(`.cell-${i}-${j}`).style.width = '41px'
+            document.querySelector(`.cell-${i}-${j}`).style.height = '41px'
         }
     }
 }
