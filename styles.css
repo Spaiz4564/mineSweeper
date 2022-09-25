@@ -24,12 +24,16 @@ span{
     color: #fdfdfd;
 }
 
+.hidden-flag{
+    opacity: 1;
+}
+
 .medium-level,
 .easy-level,
 .hard-level{
+    transition: all 0.3s;
     cursor: pointer;
     display: flex;
-    /* width: 6.5rem; */
     border-radius: 10px;
     padding: 0.8rem;
     font-size: 1rem;
@@ -41,6 +45,15 @@ span{
     box-shadow: rgb(7, 65, 124) 1.5px 1.5px 1.5px 0px inset, rgba(7, 65, 124) -1.5px -1.5px 1.5px 1px inset;
     margin-left: 47px;
 }
+
+.medium-level:hover,
+.easy-level:hover,
+.hard-level:hover{
+    background-color:#3e65cc ;
+
+
+}
+
 
 .buttons{
     display: flex;

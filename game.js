@@ -34,6 +34,7 @@ function easyLevel() {
     gLevel.SIZE = 4
     gLevel.MINES = 3
     initGame()
+    gGame.markedCount = 0
     clearInterval(interval)
     clearInterval(startTime)
     interval = null
@@ -61,7 +62,7 @@ function mediumLevel() {
 
 
     initGame()
-
+    gGame.markedCount = 0
     clearInterval(interval)
     clearInterval(startTime)
     interval = null
@@ -98,6 +99,7 @@ function hardLevel() {
     gLevel.SIZE = 7
     gLevel.MINES = 10
     initGame()
+    gGame.markedCount = 0
     clearInterval(interval)
     clearInterval(startTime)
     interval = null
@@ -150,7 +152,7 @@ function buildBoard(size) {
 }
 
 function checkGameOver() {
-    if (checkIfGameOver()) {
+    if (checkIfGameOver() && gGame.markedCount === gLevel.MINES) {
         console.log("hello")
         victory()
     }
@@ -238,6 +240,19 @@ function rightClick(cell, rowIdx, colIdx) {
             }
             currentC.isMarked = !currentC.isMarked
         }
+
+        // if (!currentC.isShown) {
+        //     if (!currentC.isMarked && currentC.isMine) {
+        //         span.innerHTML = FLAG
+        //         gGame.markedCount++
+        //         span.classList.toggle('hidden')
+        //     } else {
+
+        //         gGame.markedCount--
+        //         cell.innerHTML = `<span class="spans hidden">${cell.attributes["cell-value"].value}</span>`
+        //     }
+        //     currentC.isMarked = !currentC.isMarked
+        // }
         checkGameOver()
     }
 }
