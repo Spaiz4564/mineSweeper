@@ -98,7 +98,7 @@ span{
 .header{
     align-items: center;
     display: flex;
-    gap: 3.9%;
+    gap: 6.2%;
 }
 
 
@@ -113,8 +113,8 @@ span{
     border-radius: 10px;
     background-color:#395ec2 ;
     border: 2px solid #1a43aa ;
-    width: 75px;
-    height: 75px;
+    width: 74.2px;
+    height: 74.2px;
     
 }
 

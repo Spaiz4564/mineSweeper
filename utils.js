@@ -24,7 +24,6 @@ function renderBoard(board, selector) {
     elSelector.innerHTML = strHTML
 }
 
-
 function startTime() {
     var outputSeconds = document.getElementById('seconds')
     var outputTens = document.getElementById('tens')

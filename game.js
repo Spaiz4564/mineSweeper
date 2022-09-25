@@ -1,13 +1,14 @@
 'use strict'
 
 var FLAG = '🚩'
-var currentHeart = 2
+
 var gBoard
 var gLevel = {
     SIZE: 4,
     MINES: 3,
 }
 var gGame = {
+    currentHeart: 2,
     isOn: true,
     shownCount: 0,
     markedCount: 0,
@@ -42,15 +43,13 @@ function easyLevel() {
     tens = 0o0
     outputSeconds.innerHTML = "0" + '0'
     outputTens.innerHTML = "0" + '0'
-    currentHeart = 2
+    gGame.currentHeart = 2
     document.querySelector('.weird').classList.remove('shake')
     document.querySelector('.hearts').classList.remove('shake')
-    document.querySelector('.heart3').innerHTML = hearts[currentHeart]
-    document.querySelector('.heart2').innerHTML = hearts[currentHeart]
-    document.querySelector('.heart1').innerHTML = hearts[currentHeart]
+    document.querySelector('.heart3').innerHTML = hearts[gGame.currentHeart]
+    document.querySelector('.heart2').innerHTML = hearts[gGame.currentHeart]
+    document.querySelector('.heart1').innerHTML = hearts[gGame.currentHeart]
 }
-
-
 
 function mediumLevel() {
     hearts = ['&#10084;&#65039;', '&#10084;&#65039;', '&#10084;&#65039;']
@@ -58,7 +57,7 @@ function mediumLevel() {
     var outputTens = document.getElementById('tens')
     gGame.shownCount = 0
     gLevel.SIZE = 6
-    gLevel.MINES = 5
+    gLevel.MINES = 6
 
 
     initGame()
@@ -70,17 +69,17 @@ function mediumLevel() {
     tens = 0o0
     outputSeconds.innerHTML = "0" + '0'
     outputTens.innerHTML = "0" + '0'
-    currentHeart = 2
+    gGame.currentHeart = 2
     document.querySelector('.weird').classList.remove('shake')
     document.querySelector('.hearts').classList.remove('shake')
-    document.querySelector('.heart3').innerHTML = hearts[currentHeart]
-    document.querySelector('.heart2').innerHTML = hearts[currentHeart]
-    document.querySelector('.heart1').innerHTML = hearts[currentHeart]
+    document.querySelector('.heart3').innerHTML = hearts[gGame.currentHeart]
+    document.querySelector('.heart2').innerHTML = hearts[gGame.currentHeart]
+    document.querySelector('.heart1').innerHTML = hearts[gGame.currentHeart]
 
     for (let i = 0; i < gBoard.length; i++) {
         for (let j = 0; j < gBoard[i].length; j++) {
-            document.querySelector(`.cell-${i}-${j}`).style.width = '50px'
-            document.querySelector(`.cell-${i}-${j}`).style.height = '50px'
+            document.querySelector(`.cell-${i}-${j}`).style.width = '48px'
+            document.querySelector(`.cell-${i}-${j}`).style.height = '48px'
 
         }
     }
@@ -97,7 +96,7 @@ function hardLevel() {
     clearInterval(startTime)
     gGame.shownCount = 0
     gLevel.SIZE = 7
-    gLevel.MINES = 10
+    gLevel.MINES = 12
     initGame()
     gGame.markedCount = 0
     clearInterval(interval)
@@ -107,21 +106,20 @@ function hardLevel() {
     tens = 0o0
     outputSeconds.innerHTML = "0" + '0'
     outputTens.innerHTML = "0" + '0'
-    currentHeart = 2
+    gGame.currentHeart = 2
     document.querySelector('.weird').classList.remove('shake')
     document.querySelector('.hearts').classList.remove('shake')
-    document.querySelector('.heart3').innerHTML = hearts[currentHeart]
-    document.querySelector('.heart2').innerHTML = hearts[currentHeart]
-    document.querySelector('.heart1').innerHTML = hearts[currentHeart]
+    document.querySelector('.heart3').innerHTML = hearts[gGame.currentHeart]
+    document.querySelector('.heart2').innerHTML = hearts[gGame.currentHeart]
+    document.querySelector('.heart1').innerHTML = hearts[gGame.currentHeart]
     hearts = ['&#10084;&#65039;', '&#10084;&#65039;', '&#10084;&#65039;']
     for (let i = 0; i < gBoard.length; i++) {
         for (let j = 0; j < gBoard[i].length; j++) {
-            document.querySelector(`.cell-${i}-${j}`).style.width = '41px'
-            document.querySelector(`.cell-${i}-${j}`).style.height = '41px'
+            document.querySelector(`.cell-${i}-${j}`).style.width = '41.5px'
+            document.querySelector(`.cell-${i}-${j}`).style.height = '41.5px'
         }
     }
 }
-
 
 function buildBoard(size) {
     var board = []
@@ -153,107 +151,7 @@ function buildBoard(size) {
 
 function checkGameOver() {
     if (checkIfGameOver() && gGame.markedCount === gLevel.MINES) {
-        console.log("hello")
         victory()
-    }
-}
-
-
-
-function cellClicked(cellEl, rowIdx, colIdx) {
-
-
-
-    var currentCell = gBoard[rowIdx][colIdx]
-    const span = cellEl.querySelector('span')
-
-
-    if (span.innerText === FLAG) return console.log('forbidden')
-    if (gGame.isOn === true) {
-
-        if (!currentCell.isShown && !currentCell.isMine) {
-            for (let i = 0; i < gBoard.length; i++) {
-                for (let j = 0; j < gBoard[i].length; j++) {
-                    if (span.innerText === '0' && !currentCell.isMine) {
-                        var neg1 = document.querySelector(`.cell-${rowIdx - 1}-${colIdx - 1} span`)?.classList.remove('hidden')
-                        var neg2 = document.querySelector(`.cell-${rowIdx - 1}-${colIdx} span`)?.classList.remove('hidden')
-                        var neg3 = document.querySelector(`.cell-${rowIdx - 1}-${colIdx + 1} span`)?.classList.remove('hidden')
-                        var neg4 = document.querySelector(`.cell-${rowIdx}-${colIdx + 1} span`)?.classList.remove('hidden')
-                        var neg5 = document.querySelector(`.cell-${rowIdx}-${colIdx - 1} span`)?.classList.remove('hidden')
-                        var neg6 = document.querySelector(`.cell-${rowIdx + 1}-${colIdx} span`)?.classList.remove('hidden')
-                        var neg7 = document.querySelector(`.cell-${rowIdx + 1}-${colIdx - 1} span`)?.classList.remove('hidden')
-                        var neg8 = document.querySelector(`.cell-${rowIdx + 1}-${colIdx + 1} span`)?.classList.remove('hidden')
-                    }
-                }
-            }
-            gGame.shownCount++
-        }
-        span.classList.remove('hidden')
-        currentCell.isShown = true
-        if (currentCell.isMine) {
-            if (currentHeart === 2) {
-                hearts[2] = ''
-                document.querySelector('.heart3').innerHTML = hearts[currentHeart]
-                document.querySelector('.weird').classList.add('shake')
-                currentHeart--
-            } else if (currentHeart === 1) {
-                hearts[1] = ''
-                document.querySelector('.hearts').classList.add('shake')
-                document.querySelector('.heart2').innerHTML = hearts[currentHeart]
-                currentHeart--
-            } else {
-                hearts[0] = ''
-                // document.querySelector('.hearts').classList.add('shake')
-                document.querySelector('.heart1').innerHTML = hearts[currentHeart]
-                gameOver()
-            }
-            gGame.markedCount++
-            currentCell.isShown = true
-            cellEl.style.backgroundColor = "#a30000"
-            cellEl.innerHTML = "💣"
-        } else {
-            clearInterval(startTime)
-            clearInterval(interval)
-            interval = setInterval(startTime, 10)
-        }
-
-
-        checkGameOver()
-    }
-}
-
-
-function rightClick(cell, rowIdx, colIdx) {
-    event.preventDefault()
-    var currentC = gBoard[rowIdx][colIdx]
-    const span = cell.querySelector('span')
-    if (gGame.isOn) {
-        gBoard.isMarked = true
-        if (!currentC.isShown) {
-            if (!currentC.isMarked) {
-                span.innerHTML = FLAG
-                gGame.markedCount++
-                span.classList.remove('hidden')
-            } else {
-                gGame.markedCount--
-                cell.innerHTML = `<span class="spans hidden">${cell.attributes["cell-value"].value}</span>`
-            }
-            currentC.isMarked = !currentC.isMarked
-        }
-
-        // if (!currentC.isShown) {
-        //     if (!currentC.isMarked && currentC.isMine) {
-        //         span.innerHTML = FLAG
-        //         gGame.markedCount++
-        //         span.classList.toggle('hidden')
-        //     } else {
-
-        //         gGame.markedCount--
-        //         cell.innerHTML = `<span class="spans hidden">${cell.attributes["cell-value"].value}</span>`
-        //     }
-        //     currentC.isMarked = !currentC.isMarked
-        // }
-        checkGameOver()
     }
 }
 
@@ -276,16 +174,14 @@ function gameOver() {
 }
 
 function victory() {
+    var audio = new Audio()
+    audio.src = "sounds/victory.mp3"
+    audio.play()
     clearInterval(interval)
     gGame.isOn = false
     document.querySelector('.container').style.opacity = "0.3"
     document.getElementById('restart-btn').classList.remove('hidden1')
     document.querySelector('.you-won').classList.remove('hidden1')
-
-}
-
-function resetGame() {
-    location.reload()
 
 }
 
@@ -295,6 +191,5 @@ function checkIfGameOver() {
             if (document.querySelector(`.cell-${i}-${j} span`)?.classList.contains('hidden')) return false
         }
     }
-
     return true
 }
