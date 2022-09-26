@@ -18,8 +18,8 @@
     border: none;
     box-shadow: rgb(7, 65, 124) 1.5px 1.5px 1.5px 0px inset, rgba(7, 65, 124) -1.5px -1.5px 1.5px 1px inset;
   position: absolute;
-  bottom: 23rem;
-  right: 55.4rem;
+  bottom: 250px;
+  right: 127px;
   
 }
 
@@ -36,8 +36,8 @@
     background-color:#2c4ea5  ;
     border: none;
   position: absolute;
-  bottom: 38rem;
-  right: 54rem;
+  top: 120px;
+  right: 115px;
 }
 
 .you-won{
@@ -51,8 +51,8 @@
      background-color:#2c4ea5  ;
      border: none;
    position: absolute;
-   bottom: 38rem;
-   right: 54rem;
+   top: 120px;
+  right: 115px;
 
 }
 

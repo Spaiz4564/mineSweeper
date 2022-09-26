@@ -11,7 +11,7 @@
          border: none;
        position: absolute;
        bottom: 510px;
-       right: 160px;
+       right: 110px;
       }
     
       .you-won{
@@ -26,7 +26,7 @@
          border: none;
        position: absolute;
        bottom: 510px;
-       right: 160px;
+       right: 110px;
     
       }
 
@@ -45,7 +45,7 @@
           box-shadow: rgb(7, 65, 124) 1.5px 1.5px 1.5px 0px inset, rgba(7, 65, 124) -1.5px -1.5px 1.5px 1px inset;
         position: absolute;
         bottom: 250px;
-        right: 169px;
+        right: 126px;
         
       }
   }
