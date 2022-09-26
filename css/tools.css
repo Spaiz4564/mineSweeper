@@ -1,0 +1,73 @@
+
+#seconds,
+#tens{
+    margin-top: 0.155rem;
+}
+
+#restart-btn{
+  transition: all 0.3s;
+  cursor: pointer;
+ opacity: 1;
+    border-radius: 10px;
+    padding: 1.2rem;
+    font-size: 1.2rem;
+    font-family: 'Fredoka One';
+    font-weight: 200;
+   color: #fdfdfd;
+    background-color:#395ec2 ;
+    border: none;
+    box-shadow: rgb(7, 65, 124) 1.5px 1.5px 1.5px 0px inset, rgba(7, 65, 124) -1.5px -1.5px 1.5px 1px inset;
+  position: absolute;
+  bottom: 23rem;
+  right: 55.4rem;
+  
+}
+
+
+
+.you-lost{
+  transition: all 0.3s;
+ opacity: 1;
+    padding: 1.2rem;
+    font-size: 1.2rem;
+    font-family: 'Fredoka One';
+    font-weight: 200;
+   color: #fdfdfd;
+    background-color:#2c4ea5  ;
+    border: none;
+  position: absolute;
+  bottom: 38rem;
+  right: 54rem;
+}
+
+.you-won{
+  transition: all 0.3s;
+  opacity: 1;
+     padding: 1.2rem;
+     font-size: 1.2rem;
+     font-family: 'Fredoka One';
+     font-weight: 200;
+    color: #fdfdfd;
+     background-color:#2c4ea5  ;
+     border: none;
+   position: absolute;
+   bottom: 38rem;
+   right: 54rem;
+
+}
+
+
+.timer{
+    display: flex;
+    width: 6.5rem;
+    border-radius: 10px;
+    padding: 0.8rem;
+    font-size: 1rem;
+    font-family: 'Fredoka One';
+    font-weight: 200;
+   color: #fdfdfd;
+    background-color:#395ec2 ;
+    border: none;
+    box-shadow: rgb(7, 65, 124) 1.5px 1.5px 1.5px 0px inset, rgba(7, 65, 124) -1.5px -1.5px 1.5px 1px inset;
+    margin-left: 38px;
+}

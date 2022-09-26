@@ -1,0 +1,53 @@
+@media screen and (max-width: 800px) and (min-width: 300px) {
+    .you-lost{
+        transition: all 0.3s;
+      opacity: 1;
+         padding: 1.2rem;
+         font-size: 1.2rem;
+         font-family: 'Fredoka One';
+         font-weight: 200;
+        color: #fdfdfd;
+         background-color:#2c4ea5 ;
+         border: none;
+       position: absolute;
+       bottom: 510px;
+       right: 160px;
+      }
+    
+      .you-won{
+        transition: all 0.3s;
+      opacity: 1;
+         padding: 1.2rem;
+         font-size: 1.2rem;
+         font-family: 'Fredoka One';
+         font-weight: 200;
+        color: #fdfdfd;
+         background-color:#2c4ea5 ;
+         border: none;
+       position: absolute;
+       bottom: 510px;
+       right: 160px;
+    
+      }
+
+      #restart-btn{
+        transition: all 0.3s;
+        cursor: pointer;
+       opacity: 1;
+          border-radius: 10px;
+          padding: 1.2rem;
+          font-size: 1.2rem;
+          font-family: 'Fredoka One';
+          font-weight: 200;
+         color: #fdfdfd;
+          background-color:#395ec2 ;
+          border: none;
+          box-shadow: rgb(7, 65, 124) 1.5px 1.5px 1.5px 0px inset, rgba(7, 65, 124) -1.5px -1.5px 1.5px 1px inset;
+        position: absolute;
+        bottom: 250px;
+        right: 169px;
+        
+      }
+  }
+
+
