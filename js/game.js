@@ -154,7 +154,7 @@ function gameOver() {
     clearInterval(interval)
     gGame.isOn = false
     document.querySelector('.you-lost').classList.remove('hidden1')
-    document.querySelector('.board-container').style.opacity = "0.3"
+    document.querySelector('.board-container').style.opacity = "0.2"
     document.getElementById('restart-btn').classList.remove('hidden1')
     document.querySelector('.collapsible-container').style.visibility = "hidden"
     for (let i = 0; i < gBoard.length; i++) {
@@ -176,7 +176,7 @@ function victory() {
     clearInterval(interval)
     gGame.isOn = false
     document.querySelector('.collapsible-container').style.visibility = "hidden"
-    document.querySelector('.board-container').style.opacity = "0.3"
+    document.querySelector('.board-container').style.opacity = "0.2"
     document.getElementById('restart-btn').classList.remove('hidden1')
     document.querySelector('.you-won').classList.remove('hidden1')
 

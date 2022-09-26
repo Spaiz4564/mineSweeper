@@ -1,5 +1,6 @@
 'use strict'
 
+
 function cellClicked(cellEl, rowIdx, colIdx) {
     var currentCell = gBoard[rowIdx][colIdx]
     const span = cellEl.querySelector('span')
@@ -58,6 +59,10 @@ function cellClicked(cellEl, rowIdx, colIdx) {
     }
 }
 
+function checkHearts() {
+
+
+}
 
 function rightClick(cell, rowIdx, colIdx) {
     event.preventDefault()
