@@ -48,11 +48,13 @@ function cellClicked(cellEl, rowIdx, colIdx) {
             cellEl.style.backgroundColor = "#a30000"
             cellEl.innerHTML = "💣"
         } else {
-
             clearInterval(interval)
             interval = setInterval(startTime, 10)
         }
         checkIfVictory()
+    } else {
+        clearInterval(interval)
+        interval = setInterval(startTime, 10)
     }
 }
 

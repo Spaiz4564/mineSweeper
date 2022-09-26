@@ -1,102 +1,190 @@
 'use strict'
 
-const WALL = '&#x2630'
-const FOOD = '.'
-const EMPTY = ' '
-const SUPERFOOD = '🍇'
-
-var gGame = {
-    score: 0,
-    isOn: false
-}
+var FLAG = '🚩'
 var gBoard
-
-function init() {
-    console.log('Starting Game...')
-    gBoard = buildBoard()
-    createPacman(gBoard)
-    createGhosts(gBoard)
-    renderBoard(gBoard, '.board-container')
-    gGame.isOn = true
-    cherryInterval = setInterval(addCherry, 10000)
+var gLevel = {
+    SIZE: 4,
+    MINES: 3,
+}
+var gGame = {
+    currentHeart: 2,
+    isOn: true,
+    shownCount: 0,
+    markedCount: 0,
+    secsPassed: 0
 }
 
 
+function initGame() {
 
-function buildBoard() {
-    const SIZE = 10
-    const board = []
+    document.querySelector('.bomb-span').innerHTML = '&#128163; ' + '&nbsp;' + gLevel.MINES
+    gBoard = buildBoard(gLevel.SIZE)
+    renderBoard(gBoard, '.board-container')
+}
 
-    for (var i = 0; i < SIZE; i++) {
+function easyLevel() {
+    hearts = ['&#10084;&#65039;', '&#10084;&#65039;', '&#10084;&#65039;']
+    var outputSeconds = document.getElementById('seconds')
+    var outputTens = document.getElementById('tens')
+    outputSeconds.innerHTML = "0" + '0'
+    outputTens.innerHTML = "0" + '0'
+    clearInterval(interval)
+    clearInterval(startTime)
+    gGame.shownCount = 0
+    gLevel.SIZE = 4
+    gLevel.MINES = 3
+    initGame()
+    gGame.markedCount = 0
+    clearInterval(interval)
+    clearInterval(startTime)
+    interval = null
+    seconds = 0o0
+    tens = 0o0
+    outputSeconds.innerHTML = "0" + '0'
+    outputTens.innerHTML = "0" + '0'
+    gGame.currentHeart = 2
+    document.querySelector('.hearts-container').classList.remove('shake')
+    document.querySelector('.hearts').classList.remove('shake')
+    document.querySelector('.heart3').innerHTML = hearts[gGame.currentHeart]
+    document.querySelector('.heart2').innerHTML = hearts[gGame.currentHeart]
+    document.querySelector('.heart1').innerHTML = hearts[gGame.currentHeart]
+}
+
+function mediumLevel() {
+    hearts = ['&#10084;&#65039;', '&#10084;&#65039;', '&#10084;&#65039;']
+    var outputSeconds = document.getElementById('seconds')
+    var outputTens = document.getElementById('tens')
+    gGame.shownCount = 0
+    gLevel.SIZE = 6
+    gLevel.MINES = 6
+    initGame()
+    gGame.markedCount = 0
+    clearInterval(interval)
+    clearInterval(startTime)
+    interval = null
+    seconds = 0o0
+    tens = 0o0
+    outputSeconds.innerHTML = "0" + '0'
+    outputTens.innerHTML = "0" + '0'
+    gGame.currentHeart = 2
+    document.querySelector('.hearts-container').classList.remove('shake')
+    document.querySelector('.hearts').classList.remove('shake')
+    document.querySelector('.heart3').innerHTML = hearts[gGame.currentHeart]
+    document.querySelector('.heart2').innerHTML = hearts[gGame.currentHeart]
+    document.querySelector('.heart1').innerHTML = hearts[gGame.currentHeart]
+    for (let i = 0; i < gBoard.length; i++) {
+        for (let j = 0; j < gBoard[i].length; j++) {
+            document.querySelector(`.cell-${i}-${j}`).style.width = '48px'
+            document.querySelector(`.cell-${i}-${j}`).style.height = '48px'
+
+        }
+    }
+}
+
+function hardLevel() {
+    hearts = ['&#10084;&#65039;', '&#10084;&#65039;', '&#10084;&#65039;']
+    var outputSeconds = document.getElementById('seconds')
+    var outputTens = document.getElementById('tens')
+    outputSeconds.innerHTML = "0" + '0'
+    outputTens.innerHTML = "0" + '0'
+    clearInterval(interval)
+    clearInterval(startTime)
+    gGame.shownCount = 0
+    gLevel.SIZE = 7
+    gLevel.MINES = 12
+    initGame()
+    gGame.markedCount = 0
+    clearInterval(interval)
+    clearInterval(startTime)
+    interval = null
+    seconds = 0o0
+    tens = 0o0
+    outputSeconds.innerHTML = "0" + '0'
+    outputTens.innerHTML = "0" + '0'
+    gGame.currentHeart = 2
+    document.querySelector('.hearts-container').classList.remove('shake')
+    document.querySelector('.hearts').classList.remove('shake')
+    document.querySelector('.heart3').innerHTML = hearts[gGame.currentHeart]
+    document.querySelector('.heart2').innerHTML = hearts[gGame.currentHeart]
+    document.querySelector('.heart1').innerHTML = hearts[gGame.currentHeart]
+    hearts = ['&#10084;&#65039;', '&#10084;&#65039;', '&#10084;&#65039;']
+    for (let i = 0; i < gBoard.length; i++) {
+        for (let j = 0; j < gBoard[i].length; j++) {
+            document.querySelector(`.cell-${i}-${j}`).style.width = '41.5px'
+            document.querySelector(`.cell-${i}-${j}`).style.height = '41.5px'
+        }
+    }
+}
+
+function buildBoard(size) {
+    var board = []
+    for (let i = 0; i < size; i++) {
         board.push([])
-
-        for (var j = 0; j < SIZE; j++) {
-            board[i][j] = FOOD
-
-            if (i === 0 || i === SIZE - 1 ||
-                j === 0 || j === SIZE - 1 ||
-                (j === 3 && i > 4 && i < SIZE - 2)) {
-                board[i][j] = WALL
+        for (let j = 0; j < size; j++) {
+            board[i][j] = {
+                minesAroundCount: 0,
+                isShown: false,
+                isMine: false,
+                isMarked: false
             }
         }
-
     }
 
-    ///// Manual ////
-    board[2][5] = WALL
-    board[5][2] = WALL
-    board[6][6] = WALL
-    board[5][3] = FOOD
-    board[7][3] = FOOD
-    board[6][3] = FOOD
-    board[1][1] = SUPERFOOD
-    board[1][8] = SUPERFOOD
-    board[8][1] = SUPERFOOD
-    board[8][8] = SUPERFOOD
-    ///// Manual ////
+    // / Random Mines according to difficulty
+    for (let i = 0; i < (gLevel.MINES); i++) {
+        function generateLocation() {
+            let location = [getRandomInt(0, size - 1), getRandomInt(0, size - 1)];
+            if (board[location[0]][location[1]].isMine === true) return generateLocation(); // runs it again and returns the output of the again
+            return location; // just return it if it's unique
+        }
+        let randomLoc = generateLocation();
+        board[randomLoc[0]][randomLoc[1]].isMine = true;
+    }
 
-
-    console.log(board)
     return board
 }
 
-function updateScore(diff) {
-    gGame.score += diff
-    document.querySelector('h2 span').innerText = gGame.score
+function checkIfVictory() {
+    if (checkIfHidden() && gGame.markedCount === gLevel.MINES && hearts[0] !== '') {
+        victory()
+    }
 }
 
 function gameOver() {
-    var resetBtn = document.querySelector('.reset-btn')
-    var elH2 = document.querySelector('h2')
-    resetBtn.classList.remove('hidden')
-    elH2.innerHTML = "😵 GAME OVER 😵"
+    clearInterval(interval)
     gGame.isOn = false
-    clearInterval(gIntervalGhosts)
-    clearInterval(cherryInterval)
+    document.querySelector('.you-lost').classList.remove('hidden1')
+    document.querySelector('.container').style.opacity = "0.3"
+    document.getElementById('restart-btn').classList.remove('hidden1')
+    for (let i = 0; i < gBoard.length; i++) {
+        for (let j = 0; j < gBoard[i].length; j++) {
+            if (gBoard[i][j].isMine === true) {
+                gBoard[i][j].isShown = true
+                document.querySelector(`.cell-${i}-${j}`).style.backgroundColor = '#a30000'
+                document.querySelector(`.cell-${i}-${j}`).innerHTML = '💣'
+            }
+        }
+    }
+
 }
 
-function gameOverBtn(btn) {
-    location.reload()
-}
-
-function gameWon() {
-    var elH2 = document.querySelector('h2')
-    var resetBtn = document.querySelector('.reset-btn')
-    resetBtn.classList.remove('hidden')
-    elH2.innerHTML = "🏆 VICTORY 🏆"
-    elH2.style.textDecoration = "underline"
-    elH2.style.textDecorationColor = "#9D00FF"
-    elH2.style.textUnderlineOffset = "12px"
+function victory() {
+    var audio = new Audio()
+    audio.src = "sounds/victory.mp3"
+    audio.play()
+    clearInterval(interval)
     gGame.isOn = false
-    clearInterval(gIntervalGhosts)
-    clearInterval(cherryInterval)
+    document.querySelector('.container').style.opacity = "0.3"
+    document.getElementById('restart-btn').classList.remove('hidden1')
+    document.querySelector('.you-won').classList.remove('hidden1')
+
 }
 
-
-function addCherry() {
-    var cell = getEmptyCell()
-    // console.log(cell)
-    if (!cell) return
-    gBoard[cell.i][cell.j] = CHERRY
-    renderCell(cell, CHERRY)
+function checkIfHidden() {
+    for (let i = 0; i < gBoard.length; i++) {
+        for (let j = 0; j < gBoard[i].length; j++) {
+            if (document.querySelector(`.cell-${i}-${j} span`)?.classList.contains('hidden')) return false
+        }
+    }
+    return true
 }
