@@ -10,7 +10,7 @@
          background-color:#2c4ea5 ;
          border: none;
        position: absolute;
-       bottom: 21rem;
+       bottom: 31rem;
        right: 9rem;
       }
     
@@ -25,7 +25,7 @@
          background-color:#2c4ea5 ;
          border: none;
        position: absolute;
-       bottom: 21rem;
+       bottom: 31rem;
        right: 9rem;
     
       }
@@ -44,12 +44,10 @@
           border: none;
           box-shadow: rgb(7, 65, 124) 1.5px 1.5px 1.5px 0px inset, rgba(7, 65, 124) -1.5px -1.5px 1.5px 1px inset;
         position: absolute;
-        bottom: 8rem;
+        bottom: 15rem;
         right: 10.5rem;
         
       }
-
-
   }
 
 
