@@ -6,6 +6,8 @@ function cellClicked(cellEl, rowIdx, colIdx) {
     const span = cellEl.querySelector('span')
     if (span.innerText === FLAG) return console.log('forbidden')
     if (gGame.isOn === true) {
+        clearInterval(interval)
+        interval = setInterval(startTime, 10)
         if (!currentCell.isShown && !currentCell.isMine) {
             for (let i = 0; i < gBoard.length; i++) {
                 for (let j = 0; j < gBoard[i].length; j++) {
@@ -40,29 +42,16 @@ function cellClicked(cellEl, rowIdx, colIdx) {
                 hearts[0] = ''
                 document.querySelector('.heart1').innerHTML = hearts[gGame.currentHeart]
                 gameOver()
-
             }
-            clearInterval(interval)
-            interval = setInterval(startTime, 10)
             gGame.markedCount++
             currentCell.isShown = true
             cellEl.style.backgroundColor = "#a30000"
             cellEl.innerHTML = "💣"
-        } else {
-            clearInterval(interval)
-            interval = setInterval(startTime, 10)
         }
         checkIfVictory()
-    } else {
-        clearInterval(interval)
-        interval = setInterval(startTime, 10)
     }
 }
 
-function checkHearts() {
-
-
-}
 
 function rightClick(cell, rowIdx, colIdx) {
     event.preventDefault()

@@ -146,6 +146,7 @@ function buildBoard(size) {
 
 function checkIfVictory() {
     if (checkIfHidden() && gGame.markedCount === gLevel.MINES && hearts[0] !== '') {
+
         victory()
     }
 }
