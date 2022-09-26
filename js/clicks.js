@@ -39,6 +39,7 @@ function cellClicked(cellEl, rowIdx, colIdx) {
                 hearts[0] = ''
                 document.querySelector('.heart1').innerHTML = hearts[gGame.currentHeart]
                 gameOver()
+
             }
             clearInterval(interval)
             interval = setInterval(startTime, 10)
@@ -47,7 +48,7 @@ function cellClicked(cellEl, rowIdx, colIdx) {
             cellEl.style.backgroundColor = "#a30000"
             cellEl.innerHTML = "💣"
         } else {
-            clearInterval(startTime)
+
             clearInterval(interval)
             interval = setInterval(startTime, 10)
         }

@@ -16,6 +16,7 @@ var gGame = {
 
 
 function initGame() {
+
     document.querySelector('.bomb-span').innerHTML = '&#128163; ' + '&nbsp;' + gLevel.MINES
     gBoard = buildBoard(gLevel.SIZE)
     renderBoard(gBoard, '.board-container')
@@ -164,6 +165,7 @@ function gameOver() {
             }
         }
     }
+
 }
 
 function victory() {

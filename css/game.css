@@ -1,5 +1,5 @@
 body{
-    position: relative;
+    
     background-color: #2c4ea5;
 }
 
@@ -29,6 +29,7 @@ span{
 }
 
 .container {
+    position: relative;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 7px 29px 0px;
     border: 15px solid   #4060ad;
  margin: auto;
