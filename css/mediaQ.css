@@ -41,7 +41,7 @@
           font-weight: 200;
          color: #fdfdfd;
           background-color:#395ec2 ;
-          border: none;
+          border: 2px solid white;
           box-shadow: rgb(7, 65, 124) 1.5px 1.5px 1.5px 0px inset, rgba(7, 65, 124) -1.5px -1.5px 1.5px 1px inset;
         position: absolute;
         bottom: 250px;
