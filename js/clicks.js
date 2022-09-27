@@ -15,9 +15,7 @@ function cellClicked(cellEl, rowIdx, colIdx) {
         span.classList.remove('hidden')
         currentCell.isShown = true
         if (currentCell.isMine) {
-            var audio = new Audio()
-            audio.src = "sounds/badclick.mp3"
-            audio.play()
+            badClick.play()
             checkHearts()
             gGame.markedCount++
             currentCell.isShown = true
