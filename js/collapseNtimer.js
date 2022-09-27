@@ -1,13 +1,13 @@
 var interval
 var seconds = 0o0
 var tens = 0o0
-var i
-var coll = document.getElementsByClassName("collapsible");
 
-for (i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("click", function () {
-        this.classList.toggle("active");
-        var content = this.nextElementSibling;
+function collapse(item) {
+    var i
+    var coll = document.getElementsByClassName("collapsible");
+    for (i = 0; i < coll.length; i++) {
+        item.classList.toggle("active");
+        var content = item.nextElementSibling;
         if (content.style.display === "block") {
             content.style.display = "none";
             document.querySelector('.expand').style.transform = "rotate(90deg)"
@@ -15,21 +15,17 @@ for (i = 0; i < coll.length; i++) {
             content.style.display = "block";
             document.querySelector('.expand').style.transform = "rotate(270deg)"
         }
-    });
-}
-
-for (i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("click", function () {
-        this.classList.toggle("active");
-        var content = this.nextElementSibling;
+    }
+    for (i = 0; i < coll.length; i++) {
+        item.classList.toggle("active");
+        var content = item.nextElementSibling;
         if (content.style.maxHeight) {
             content.style.maxHeight = null;
         } else {
             content.style.maxHeight = content.scrollHeight + "px";
         }
-    });
+    }
 }
-
 
 function startTime() {
     var outputSeconds = document.getElementById('seconds')
