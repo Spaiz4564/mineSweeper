@@ -9,40 +9,16 @@ function cellClicked(cellEl, rowIdx, colIdx) {
         clearInterval(interval)
         interval = setInterval(startTime, 10)
         if (!currentCell.isShown && !currentCell.isMine) {
-            for (let i = 0; i < gBoard.length; i++) {
-                for (let j = 0; j < gBoard[i].length; j++) {
-                    if (span.innerText === '0' && !currentCell.isMine) {
-                        var neg1 = document.querySelector(`.cell-${rowIdx - 1}-${colIdx - 1} span`)?.classList.remove('hidden')
-                        var neg2 = document.querySelector(`.cell-${rowIdx - 1}-${colIdx} span`)?.classList.remove('hidden')
-                        var neg3 = document.querySelector(`.cell-${rowIdx - 1}-${colIdx + 1} span`)?.classList.remove('hidden')
-                        var neg4 = document.querySelector(`.cell-${rowIdx}-${colIdx + 1} span`)?.classList.remove('hidden')
-                        var neg5 = document.querySelector(`.cell-${rowIdx}-${colIdx - 1} span`)?.classList.remove('hidden')
-                        var neg6 = document.querySelector(`.cell-${rowIdx + 1}-${colIdx} span`)?.classList.remove('hidden')
-                        var neg7 = document.querySelector(`.cell-${rowIdx + 1}-${colIdx - 1} span`)?.classList.remove('hidden')
-                        var neg8 = document.querySelector(`.cell-${rowIdx + 1}-${colIdx + 1} span`)?.classList.remove('hidden')
-                    }
-                }
-            }
+            checkNeg(cellEl, rowIdx, colIdx)
             gGame.shownCount++
         }
         span.classList.remove('hidden')
         currentCell.isShown = true
         if (currentCell.isMine) {
-            if (gGame.currentHeart === 2) {
-                hearts[2] = ''
-                document.querySelector('.heart3').innerHTML = hearts[gGame.currentHeart]
-                document.querySelector('.hearts-container').classList.add('shake')
-                gGame.currentHeart--
-            } else if (gGame.currentHeart === 1) {
-                hearts[1] = ''
-                document.querySelector('.hearts').classList.add('shake')
-                document.querySelector('.heart2').innerHTML = hearts[gGame.currentHeart]
-                gGame.currentHeart--
-            } else {
-                hearts[0] = ''
-                document.querySelector('.heart1').innerHTML = hearts[gGame.currentHeart]
-                gameOver()
-            }
+            var audio = new Audio()
+            audio.src = "sounds/badclick.mp3"
+            audio.play()
+            checkHearts()
             gGame.markedCount++
             currentCell.isShown = true
             cellEl.style.backgroundColor = "#a30000"
@@ -51,7 +27,6 @@ function cellClicked(cellEl, rowIdx, colIdx) {
         checkIfVictory()
     }
 }
-
 
 function rightClick(cell, rowIdx, colIdx) {
     event.preventDefault()

@@ -14,22 +14,35 @@ var gGame = {
     secsPassed: 0
 }
 
-
 function initGame() {
-
     document.querySelector('.bomb-span').innerHTML = '&#128163; ' + '&nbsp;' + gLevel.MINES
     gBoard = buildBoard(gLevel.SIZE)
     renderBoard(gBoard, '.board-container')
+}
+function buildBoard(size) {
+    var board = []
+    for (let i = 0; i < size; i++) {
+        board.push([])
+        for (let j = 0; j < size; j++) {
+            board[i][j] = {
+                minesAroundCount: 0,
+                isShown: false,
+                isMine: false,
+                isMarked: false
+            }
+        }
+    }
+
+    // / Random Mines according to difficulty
+    randomMines(gLevel.SIZE, board)
+
+    return board
 }
 
 function easyLevel() {
     hearts = ['&#10084;&#65039;', '&#10084;&#65039;', '&#10084;&#65039;']
     var outputSeconds = document.getElementById('seconds')
     var outputTens = document.getElementById('tens')
-    outputSeconds.innerHTML = "0" + '0'
-    outputTens.innerHTML = "0" + '0'
-    clearInterval(interval)
-    clearInterval(startTime)
     gGame.shownCount = 0
     gLevel.SIZE = 4
     gLevel.MINES = 3
@@ -43,11 +56,7 @@ function easyLevel() {
     outputSeconds.innerHTML = "0" + '0'
     outputTens.innerHTML = "0" + '0'
     gGame.currentHeart = 2
-    document.querySelector('.hearts-container').classList.remove('shake')
-    document.querySelector('.hearts').classList.remove('shake')
-    document.querySelector('.heart3').innerHTML = hearts[gGame.currentHeart]
-    document.querySelector('.heart2').innerHTML = hearts[gGame.currentHeart]
-    document.querySelector('.heart1').innerHTML = hearts[gGame.currentHeart]
+    resetHearts()
 }
 
 function mediumLevel() {
@@ -67,16 +76,11 @@ function mediumLevel() {
     outputSeconds.innerHTML = "0" + '0'
     outputTens.innerHTML = "0" + '0'
     gGame.currentHeart = 2
-    document.querySelector('.hearts-container').classList.remove('shake')
-    document.querySelector('.hearts').classList.remove('shake')
-    document.querySelector('.heart3').innerHTML = hearts[gGame.currentHeart]
-    document.querySelector('.heart2').innerHTML = hearts[gGame.currentHeart]
-    document.querySelector('.heart1').innerHTML = hearts[gGame.currentHeart]
+    resetHearts()
     for (let i = 0; i < gBoard.length; i++) {
         for (let j = 0; j < gBoard[i].length; j++) {
             document.querySelector(`.cell-${i}-${j}`).style.width = '48px'
             document.querySelector(`.cell-${i}-${j}`).style.height = '48px'
-
         }
     }
 }
@@ -85,10 +89,6 @@ function hardLevel() {
     hearts = ['&#10084;&#65039;', '&#10084;&#65039;', '&#10084;&#65039;']
     var outputSeconds = document.getElementById('seconds')
     var outputTens = document.getElementById('tens')
-    outputSeconds.innerHTML = "0" + '0'
-    outputTens.innerHTML = "0" + '0'
-    clearInterval(interval)
-    clearInterval(startTime)
     gGame.shownCount = 0
     gLevel.SIZE = 7
     gLevel.MINES = 12
@@ -102,12 +102,7 @@ function hardLevel() {
     outputSeconds.innerHTML = "0" + '0'
     outputTens.innerHTML = "0" + '0'
     gGame.currentHeart = 2
-    document.querySelector('.hearts-container').classList.remove('shake')
-    document.querySelector('.hearts').classList.remove('shake')
-    document.querySelector('.heart3').innerHTML = hearts[gGame.currentHeart]
-    document.querySelector('.heart2').innerHTML = hearts[gGame.currentHeart]
-    document.querySelector('.heart1').innerHTML = hearts[gGame.currentHeart]
-    hearts = ['&#10084;&#65039;', '&#10084;&#65039;', '&#10084;&#65039;']
+    resetHearts()
     for (let i = 0; i < gBoard.length; i++) {
         for (let j = 0; j < gBoard[i].length; j++) {
             document.querySelector(`.cell-${i}-${j}`).style.width = '41.5px'
@@ -116,42 +111,16 @@ function hardLevel() {
     }
 }
 
-function buildBoard(size) {
-    var board = []
-    for (let i = 0; i < size; i++) {
-        board.push([])
-        for (let j = 0; j < size; j++) {
-            board[i][j] = {
-                minesAroundCount: 0,
-                isShown: false,
-                isMine: false,
-                isMarked: false
-            }
-        }
-    }
-
-    // / Random Mines according to difficulty
-    for (let i = 0; i < (gLevel.MINES); i++) {
-        function generateLocation() {
-            let location = [getRandomInt(0, size - 1), getRandomInt(0, size - 1)];
-            if (board[location[0]][location[1]].isMine === true) return generateLocation(); // runs it again and returns the output of the again
-            return location; // just return it if it's unique
-        }
-        let randomLoc = generateLocation();
-        board[randomLoc[0]][randomLoc[1]].isMine = true;
-    }
-
-    return board
-}
-
 function checkIfVictory() {
     if (checkIfHidden() && gGame.markedCount === gLevel.MINES && hearts[0] !== '') {
-
         victory()
     }
 }
 
 function gameOver() {
+    var audio = new Audio()
+    audio.src = "sounds/lose.wav"
+    audio.play()
     clearInterval(interval)
     gGame.isOn = false
     document.querySelector('.you-lost').classList.remove('hidden1')
