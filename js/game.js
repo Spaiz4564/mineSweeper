@@ -126,7 +126,7 @@ function gameOver() {
     document.querySelector('.you-lost').classList.remove('hidden1')
     document.querySelector('.board-container').style.opacity = "0.2"
     document.getElementById('restart-btn').classList.remove('hidden1')
-    document.querySelector('.collapsible-container').style.visibility = "hidden"
+    document.querySelector('.collapsible').disabled = "true"
     for (let i = 0; i < gBoard.length; i++) {
         for (let j = 0; j < gBoard[i].length; j++) {
             if (gBoard[i][j].isMine === true) {
@@ -145,7 +145,7 @@ function victory() {
     audio.play()
     clearInterval(interval)
     gGame.isOn = false
-    document.querySelector('.collapsible-container').style.visibility = "hidden"
+    document.querySelector('.collapsible').disabled = "true"
     document.querySelector('.board-container').style.opacity = "0.2"
     document.getElementById('restart-btn').classList.remove('hidden1')
     document.querySelector('.you-won').classList.remove('hidden1')

@@ -18,12 +18,12 @@
 <body onload = "initGame()">
 <div class = "container">
     <h2 class = "title-h2"> 💣 Minesweeper </h2>
-    <h3 class="you-won hidden1">YOU WON&nbsp;<span style="font-size: 1.3rem"> 🏆</span></h3>
-<h3 class="you-lost hidden1">YOU LOST&nbsp;<span style="font-size: 1.2rem"> 😵</span></h3>
+    <h3 class="you-won hidden1"><img src="img/victory.img.png"><span style="font-size: 1.5rem"></span></h3>
+<h3 class="you-lost hidden1">GAME OVER&nbsp;<span style="font-size: 1.2rem"> 💥</span></h3>
 <button class="hidden1" onclick = "resetGame(this)"  id="restart-btn">Play Again?</button>
     <div class ="collapsible-container">
         
-        <button type="button" class="collapsible">Difficulty<span class="expand"> &#x3e;</span></button>
+        <button type="button "  class="collapsible">Difficulty<span class="expand"> &#x3e;</span></button>
         <div class ="buttons">
             <button class="easy-level" onclick="easyLevel(this)">Easy</button>
             <button class="medium-level" onclick="mediumLevel(this)">Medium</button>

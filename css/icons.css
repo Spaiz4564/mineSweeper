@@ -1,5 +1,5 @@
 .hearts{
-    width: 8rem;
+    width: 6rem;
       font-size: 1.2rem;
       top: 6%;
       right: 10%;
@@ -19,8 +19,13 @@
   }
 
   .hearts-container{
-      margin-right: 1px;
+    margin-right: 1px;
     width: 7.8rem;
+  }
+
+  img{
+    width: 75px;
+    height: 75px;
   }
 
   .expand{

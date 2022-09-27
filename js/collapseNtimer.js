@@ -1,8 +1,8 @@
 var interval
 var seconds = 0o0
 var tens = 0o0
+var i
 var coll = document.getElementsByClassName("collapsible");
-var i;
 
 for (i = 0; i < coll.length; i++) {
     coll[i].addEventListener("click", function () {
@@ -11,14 +11,12 @@ for (i = 0; i < coll.length; i++) {
         if (content.style.display === "block") {
             content.style.display = "none";
             document.querySelector('.expand').style.transform = "rotate(90deg)"
-
         } else {
             content.style.display = "block";
             document.querySelector('.expand').style.transform = "rotate(270deg)"
         }
     });
 }
-
 
 for (i = 0; i < coll.length; i++) {
     coll[i].addEventListener("click", function () {
@@ -31,6 +29,7 @@ for (i = 0; i < coll.length; i++) {
         }
     });
 }
+
 
 function startTime() {
     var outputSeconds = document.getElementById('seconds')
@@ -50,4 +49,4 @@ function startTime() {
     if (seconds > 9)
         outputSeconds.innerHTML = seconds
 
-} ``
+}
