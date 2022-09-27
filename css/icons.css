@@ -18,6 +18,10 @@
     perspective: 1000px;
   }
 
+  .hearts-container{
+    width: 5.8rem;
+  }
+
   .expand{
     transition: all 0.5s;
     font-size: 0.9rem;
