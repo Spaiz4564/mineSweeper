@@ -17,6 +17,15 @@
     backface-visibility: hidden;
     perspective: 1000px;
   }
+
+  .expand{
+    transition: all 0.5s;
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+    display: inline-block;
+    transform: rotate(90deg);
+}
+
   
     
   @keyframes shake {

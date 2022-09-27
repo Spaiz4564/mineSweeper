@@ -10,8 +10,11 @@ for (i = 0; i < coll.length; i++) {
         var content = this.nextElementSibling;
         if (content.style.display === "block") {
             content.style.display = "none";
+            document.querySelector('.expand').style.transform = "rotate(90deg)"
+
         } else {
             content.style.display = "block";
+            document.querySelector('.expand').style.transform = "rotate(270deg)"
         }
     });
 }

@@ -26,14 +26,6 @@
     height:6.5rem;
 }
 
-.expand{
-    font-size: 0.9rem;
-    margin-left: 0.5rem;
-    display: inline-block;
-    transform: rotate(90deg);
-}
-
-
 .collapsible{
     cursor: pointer;
     font-size: 1rem;
