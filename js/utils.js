@@ -1,7 +1,7 @@
 'use strict'
 
 var badClick = new Audio()
-badClick.src = "sounds/incorrect.mp3"
+badClick.src = "sounds/victory.mp3"
 var hearts = ['&#10084;&#65039;', '&#10084;&#65039;', '&#10084;&#65039;']
 document.querySelector('.heart1').innerHTML = hearts[0]
 document.querySelector('.heart2').innerHTML = hearts[1]

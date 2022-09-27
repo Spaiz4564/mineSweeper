@@ -16,6 +16,7 @@ function cellClicked(cellEl, rowIdx, colIdx) {
         currentCell.isShown = true
         if (currentCell.isMine) {
             badClick.play()
+
             checkHearts()
             gGame.markedCount++
             currentCell.isShown = true
