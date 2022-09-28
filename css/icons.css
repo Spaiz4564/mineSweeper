@@ -36,7 +36,14 @@
     transform: rotate(90deg);
 }
 
-  
+  .hint img{
+    cursor: pointer;
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    right: 35px;
+    top: 54px;
+  }
     
   @keyframes shake {
       10%, 90% {

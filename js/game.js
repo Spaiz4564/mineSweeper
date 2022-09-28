@@ -7,6 +7,7 @@ var gLevel = {
     MINES: 3,
 }
 var gGame = {
+    hintCount: 0,
     currentHeart: 2,
     isOn: true,
     shownCount: 0,
@@ -40,7 +41,9 @@ function buildBoard(size) {
 }
 
 function easyLevel() {
+    document.querySelector('.hint img').src = "img/lighton.png"
     hearts = ['&#10084;&#65039;', '&#10084;&#65039;', '&#10084;&#65039;']
+    gGame.hintCount = 0
     var outputSeconds = document.getElementById('seconds')
     var outputTens = document.getElementById('tens')
     gGame.shownCount = 0
@@ -60,7 +63,9 @@ function easyLevel() {
 }
 
 function mediumLevel() {
+    document.querySelector('.hint img').src = "img/lighton.png"
     hearts = ['&#10084;&#65039;', '&#10084;&#65039;', '&#10084;&#65039;']
+    gGame.hintCount = 0
     var outputSeconds = document.getElementById('seconds')
     var outputTens = document.getElementById('tens')
     gGame.shownCount = 0
@@ -86,7 +91,9 @@ function mediumLevel() {
 }
 
 function hardLevel() {
+    document.querySelector('.hint img').src = "img/lighton.png"
     hearts = ['&#10084;&#65039;', '&#10084;&#65039;', '&#10084;&#65039;']
+    gGame.hintCount = 0
     var outputSeconds = document.getElementById('seconds')
     var outputTens = document.getElementById('tens')
     gGame.shownCount = 0

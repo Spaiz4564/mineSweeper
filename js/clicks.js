@@ -1,6 +1,5 @@
 'use strict'
 
-
 function cellClicked(cellEl, rowIdx, colIdx) {
     var currentCell = gBoard[rowIdx][colIdx]
     const span = cellEl.querySelector('span')
@@ -55,3 +54,13 @@ function resetGame() {
     location.reload()
 }
 
+function hint() {
+
+    document.querySelector('.hint img').src = "img/lightoff.png"
+    if (gGame.hintCount === 0) {
+
+        document.querySelector(`.cell-${getRandomInt(0, gLevel.SIZE - 1)}-${getRandomInt(0, gLevel.SIZE - 1)} span`).classList.remove('hidden')
+
+    }
+    gGame.hintCount++
+}
