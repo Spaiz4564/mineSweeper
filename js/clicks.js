@@ -55,12 +55,16 @@ function resetGame() {
 }
 
 function hint() {
-
-    document.querySelector('.hint img').src = "img/lightoff.png"
     if (gGame.hintCount === 0) {
-
-        document.querySelector(`.cell-${getRandomInt(0, gLevel.SIZE - 1)}-${getRandomInt(0, gLevel.SIZE - 1)} span`).classList.remove('hidden')
-
+        document.querySelector('.hint img').src = "img/lightoff.png"
+        var arr = []
+        for (let i = 0; i < gBoard.length; i++) {
+            for (let j = 0; j < gBoard[i].length; j++) {
+                if (document.querySelector(`.cell-${i}-${j} span`)?.classList.contains('hidden'))
+                    arr.push(document.querySelector(`.cell-${i}-${j} span`))
+            }
+        }
+        arr[getRandomInt(0, gLevel.SIZE)]?.classList.remove('hidden')
     }
     gGame.hintCount++
 }
