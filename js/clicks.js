@@ -60,7 +60,7 @@ function hint() {
         var arr = []
         for (let i = 0; i < gBoard.length; i++) {
             for (let j = 0; j < gBoard[i].length; j++) {
-                if (document.querySelector(`.cell-${i}-${j} span`)?.classList.contains('hidden'))
+                if (document.querySelector(`.cell-${i}-${j} span`)?.classList.contains('hidden') && !gBoard[i][j].isMine)
                     arr.push(document.querySelector(`.cell-${i}-${j} span`))
             }
         }
