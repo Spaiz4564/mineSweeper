@@ -2,10 +2,22 @@ var interval
 var seconds = 0o0
 var tens = 0o0
 
+
+function resetTimer() {
+    var outputSeconds = document.getElementById('seconds')
+    var outputTens = document.getElementById('tens')
+    clearInterval(interval)
+    clearInterval(startTime)
+    interval = null
+    seconds = 0o0
+    tens = 0o0
+    outputSeconds.innerHTML = "0" + '0'
+    outputTens.innerHTML = "0" + '0'
+}
+
 function collapse(item) {
-    var i
     var coll = document.getElementsByClassName("collapsible");
-    for (i = 0; i < coll.length; i++) {
+    for (let i = 0; i < coll.length; i++) {
         item.classList.toggle("active");
         var content = item.nextElementSibling;
         if (content.style.display === "block") {
@@ -16,7 +28,7 @@ function collapse(item) {
             document.querySelector('.expand').style.transform = "rotate(270deg)"
         }
     }
-    for (i = 0; i < coll.length; i++) {
+    for (let i = 0; i < coll.length; i++) {
         item.classList.toggle("active");
         var content = item.nextElementSibling;
         if (content.style.maxHeight) {

@@ -16,6 +16,12 @@ var gGame = {
 }
 
 function initGame() {
+    resetTimer()
+    gGame.hintCount = 0
+    gGame.shownCount = 0
+    gGame.markedCount = 0
+    hearts = ['&#10084;&#65039;', '&#10084;&#65039;', '&#10084;&#65039;']
+    document.querySelector('.hint img').src = "img/lighton.png"
     document.querySelector('.bomb-span').innerHTML = '&#128163; ' + '&nbsp;' + gLevel.MINES
     gBoard = buildBoard(gLevel.SIZE)
     renderBoard(gBoard, '.board-container')
@@ -41,46 +47,18 @@ function buildBoard(size) {
 }
 
 function easyLevel() {
-    document.querySelector('.hint img').src = "img/lighton.png"
-    hearts = ['&#10084;&#65039;', '&#10084;&#65039;', '&#10084;&#65039;']
-    gGame.hintCount = 0
-    var outputSeconds = document.getElementById('seconds')
-    var outputTens = document.getElementById('tens')
-    gGame.shownCount = 0
     gLevel.SIZE = 4
     gLevel.MINES = 3
     initGame()
-    gGame.markedCount = 0
-    clearInterval(interval)
-    clearInterval(startTime)
-    interval = null
-    seconds = 0o0
-    tens = 0o0
-    outputSeconds.innerHTML = "0" + '0'
-    outputTens.innerHTML = "0" + '0'
-    gGame.currentHeart = 2
+    resetTimer()
     resetHearts()
 }
 
 function mediumLevel() {
-    document.querySelector('.hint img').src = "img/lighton.png"
-    hearts = ['&#10084;&#65039;', '&#10084;&#65039;', '&#10084;&#65039;']
-    gGame.hintCount = 0
-    var outputSeconds = document.getElementById('seconds')
-    var outputTens = document.getElementById('tens')
-    gGame.shownCount = 0
     gLevel.SIZE = 6
     gLevel.MINES = 6
     initGame()
-    gGame.markedCount = 0
-    clearInterval(interval)
-    clearInterval(startTime)
-    interval = null
-    seconds = 0o0
-    tens = 0o0
-    outputSeconds.innerHTML = "0" + '0'
-    outputTens.innerHTML = "0" + '0'
-    gGame.currentHeart = 2
+    resetTimer()
     resetHearts()
     for (let i = 0; i < gBoard.length; i++) {
         for (let j = 0; j < gBoard[i].length; j++) {
@@ -91,24 +69,10 @@ function mediumLevel() {
 }
 
 function hardLevel() {
-    document.querySelector('.hint img').src = "img/lighton.png"
-    hearts = ['&#10084;&#65039;', '&#10084;&#65039;', '&#10084;&#65039;']
-    gGame.hintCount = 0
-    var outputSeconds = document.getElementById('seconds')
-    var outputTens = document.getElementById('tens')
-    gGame.shownCount = 0
     gLevel.SIZE = 7
     gLevel.MINES = 12
     initGame()
-    gGame.markedCount = 0
-    clearInterval(interval)
-    clearInterval(startTime)
-    interval = null
-    seconds = 0o0
-    tens = 0o0
-    outputSeconds.innerHTML = "0" + '0'
-    outputTens.innerHTML = "0" + '0'
-    gGame.currentHeart = 2
+    resetTimer()
     resetHearts()
     for (let i = 0; i < gBoard.length; i++) {
         for (let j = 0; j < gBoard[i].length; j++) {
@@ -156,7 +120,6 @@ function victory() {
     document.querySelector('.board-container').style.opacity = "0.2"
     document.getElementById('restart-btn').classList.remove('hidden1')
     document.querySelector('.you-won').classList.remove('hidden1')
-
 }
 
 function checkIfHidden() {

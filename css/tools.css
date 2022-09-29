@@ -24,38 +24,29 @@
   
 }
 
-
-
-.you-lost{
+.you-lost,
+.you-won{
   z-index: 999;
   transition: all 0.3s;
- opacity: 1;
-    padding: 1.5rem;
-    font-size: 2.2rem;
-    font-family: 'Fredoka One';
-    font-weight: 200;
-   color: #fdfdfd;
-    border: none;
+  opacity: 1;
+  font-size: 2.2rem;
+  font-family: 'Fredoka One';
+  border: none;
   position: absolute;
+  color: #fdfdfd;
+  font-weight: 200;
+}
+
+.you-lost{
+    padding: 1.5rem;
   bottom: 220px;
   right: 140px;
 }
 
 .you-won{
-  font-weight: bold;
-  z-index: 999;
-  transition: all 0.3s;
-  opacity: 1;
      padding: 1.2rem;
-     font-size: 2.2rem;
-     font-family: 'Fredoka One';
-     font-weight: 200;
-    color: #fdfdfd;
-     border: none;
-   position: absolute;
    bottom: 230px;
   right: 155px;
-
 }
 
 

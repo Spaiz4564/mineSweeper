@@ -1,32 +1,28 @@
 @media screen and (max-width: 800px) and (min-width: 300px) {
-    .you-lost{
-        transition: all 0.3s;
-      opacity: 1;
-         padding: 1.2rem;
-         font-size: 1.2rem;
-         font-family: 'Fredoka One';
-         font-weight: 200;
-        color: #fdfdfd;
     
-         border: none;
-       position: absolute;
+  .you-lost,
+  .you-won{
+    transition: all 0.3s;
+    opacity: 1;
+    padding: 1.2rem;
+    font-family: 'Fredoka One';
+    border: none;
+    position: absolute;
+    font-weight: 200;
+    color: #fdfdfd;
+
+  }
+  
+  .you-lost{  
+         font-size: 1.2rem;
        bottom: 245px;
        right: 145px;
       }
     
       .you-won{
-        transition: all 0.3s;
-      opacity: 1;
-         padding: 1.2rem;
          font-size: 2.2rem;
-         font-family: 'Fredoka One';
-         font-weight: 200;
-        color: #fdfdfd;
-         border: none;
-       position: absolute;
        bottom: 235px;
        right: 140px;
-    
       }
 
       #restart-btn{

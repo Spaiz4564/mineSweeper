@@ -3,7 +3,7 @@
 function cellClicked(cellEl, rowIdx, colIdx) {
     var currentCell = gBoard[rowIdx][colIdx]
     const span = cellEl.querySelector('span')
-    if (span.innerText === FLAG) return console.log('forbidden')
+    if (span.innerText === FLAG) return
     if (gGame.isOn === true) {
         clearInterval(interval)
         interval = setInterval(startTime, 10)
@@ -14,13 +14,15 @@ function cellClicked(cellEl, rowIdx, colIdx) {
         span.classList.remove('hidden')
         currentCell.isShown = true
         if (currentCell.isMine) {
+            var badClick = new Audio()
+            badClick.src = "sounds/incorrect.mp3"
             badClick.play()
-
             checkHearts()
             gGame.markedCount++
             currentCell.isShown = true
             cellEl.style.backgroundColor = "#a30000"
-            cellEl.innerHTML = "💣"
+            cellEl.innerHTML = `<span class="spans">💣</span>`
+            cellEl.style.pointerEvents = "none";
         }
         checkIfVictory()
     }
@@ -45,7 +47,6 @@ function rightClick(cell, rowIdx, colIdx) {
             }
             currentC.isMarked = !currentC.isMarked
         }
-
         checkIfVictory()
     }
 }
@@ -65,6 +66,7 @@ function hint() {
             }
         }
         arr[getRandomInt(0, gLevel.SIZE)]?.classList.remove('hidden')
+
     }
     gGame.hintCount++
 }
